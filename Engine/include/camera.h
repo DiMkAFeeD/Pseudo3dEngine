@@ -6,7 +6,7 @@
 
 #include <map.h>
 
-namespace Camera {
+namespace pfe {
 	class Camera {
 	public:
 		Camera(sf::Angle fov, int rays, float lenght, float stepRay);
@@ -18,12 +18,12 @@ namespace Camera {
 
 		void updateNumRays(const int& numRays) { this->numRays = numRays; }
 
-		void Render(const sf::Vector2u& windowSize, const Map::Map& map);
+		void Render(const sf::Vector2u& windowSize, const pfe::Map& map);
 	private:
-		void castRayDefault(const sf::Angle& direction, int iRay, const sf::Vector2u& windowSize, const Map::Map& map);
-		void castRaySectionMethod(const sf::Angle& direction, int iRay, const sf::Vector2u& windowSize, const Map::Map& map);
+		void castRayDefault(const sf::Angle& direction, int iRay, const sf::Vector2u& windowSize, const pfe::Map& map);
+		void castRaySectionMethod(const sf::Angle& direction, int iRay, const sf::Vector2u& windowSize, const pfe::Map& map);
 
-		void drawLine(const float& lenght, const Map::Map::Wall& wall ,const int& iRay, const sf::Vector2u& windowSize);
+		void drawLine(const float& lenght, const pfe::Map::Wall& wall ,const int& iRay, const sf::Vector2u& windowSize);
 
 		sf::Vector2f position;
 		sf::Angle rotation;

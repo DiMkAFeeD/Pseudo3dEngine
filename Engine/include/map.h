@@ -8,9 +8,7 @@
 #include <iostream>
 #include <nlohmann/json.hpp>
 
-#include <config.h>
-
-namespace Map {
+namespace pfe {
 	class Map {
 	public:
 		class Wall {

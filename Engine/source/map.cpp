@@ -2,23 +2,23 @@
 
 using json = nlohmann::json;
 
-Map::Map::Map(std::string filename) {
+pfe::Map::Map(std::string filename) {
 	wallsInMap.setPrimitiveType(sf::PrimitiveType::Lines);
 
 	loadFromFile(filename);
 }
 
-void Map::Map::AddWall(const sf::Vector2f& p0, const sf::Vector2f& p1, const sf::Color& color, float th, float bh)
+void pfe::Map::AddWall(const sf::Vector2f& p0, const sf::Vector2f& p1, const sf::Color& color, float th, float bh)
 {
 	walls.push_back(Wall(p0, p1, color, th, bh));
 }
 
-void Map::Map::Draw(sf::RenderWindow& window)
+void pfe::Map::Draw(sf::RenderWindow& window)
 {
 	window.draw(wallsInMap);
 }
 
-std::vector<std::pair<sf::Vector2f, Map::Map::Wall>> Map::Map::getRayIntersection(
+std::vector<std::pair<sf::Vector2f, pfe::Map::Wall>> pfe::Map::getRayIntersection(
 	const sf::Vector2f& start,
 	const sf::Vector2f& direction,
 	float maxDist
@@ -59,7 +59,7 @@ std::vector<std::pair<sf::Vector2f, Map::Map::Wall>> Map::Map::getRayIntersectio
 }
 
 
-void Map::Map::loadFromFile(const std::string& filePath)
+void pfe::Map::loadFromFile(const std::string& filePath)
 {
 	std::ifstream in(filePath);
 	if (!in.is_open()) {
@@ -100,7 +100,7 @@ void Map::Map::loadFromFile(const std::string& filePath)
 	}
 }
 
-void Map::Map::saveToFile(const std::string& filePath)
+void pfe::Map::saveToFile(const std::string& filePath)
 {
 	std::ofstream out(filePath);
 	if (!out.is_open()) {

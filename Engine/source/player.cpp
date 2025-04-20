@@ -1,6 +1,6 @@
 #include <player.h>
 
-Player::Player::Player(sf::Vector2f pos) 
+pfe::Player::Player(sf::Vector2f pos) 
 	: position(pos), playerShape(sf::CircleShape(3)), dirLine(sf::VertexArray(sf::PrimitiveType::Lines, 2)), 
 	camera(Camera::Camera(sf::degrees(90), 1000, 200, 2))
 {
@@ -9,12 +9,12 @@ Player::Player::Player(sf::Vector2f pos)
 	dirLine[1].color = sf::Color::Blue;
 }
 
-void Player::Player::Movement(sf::RenderWindow& window)
+void pfe::Player::Movement(sf::RenderWindow& window)
 {
 	if (!window.hasFocus()) return;
 
 	lastMousePos = sf::Mouse::getPosition();
-	sf::Mouse::setPosition(sf::Vector2i(config::screenSize.x / 2, config::screenSize.y / 2));
+	sf::Mouse::setPosition(sf::Vector2i(window.getSize().x / 2, window.getSize().y / 2));
 	rotation -= sf::degrees(sf::Mouse::getPosition().x - lastMousePos.x) * sensity;
 
 	sf::Vector2f direction(0, 0);
@@ -39,7 +39,7 @@ void Player::Player::Movement(sf::RenderWindow& window)
 		direction.y -= sin(r.asRadians());
 	}
 
-	position += direction * config::deltaTime * speed;
+	position += direction * speed;
 
 	dirLine[0].position = position + sf::Vector2f(playerShape.getRadius() / 2, playerShape.getRadius() / 2);
 	float dirLenght = 15;
@@ -49,19 +49,19 @@ void Player::Player::Movement(sf::RenderWindow& window)
 	camera.UpdateInfo(dirLine[0].position, rotation);
 }
 
-void Player::Player::CameraRender(const sf::Vector2u& windowSize, const Map::Map& map)
+void pfe::Player::CameraRender(const sf::Vector2u& windowSize, const pfe::Map& map)
 {
 	camera.Render(windowSize, map);
 }
 
-void Player::Player::Draw(sf::RenderWindow& window)
+void pfe::Player::Draw(sf::RenderWindow& window)
 {
 	window.draw(playerShape);
 	camera.DrawMinimapView(window);
 	window.draw(dirLine);
 }
 
-void Player::Player::DrawCameraView(sf::RenderWindow& window)
+void pfe::Player::DrawCameraView(sf::RenderWindow& window)
 {
 	camera.DrawCameraView(window);
 }
